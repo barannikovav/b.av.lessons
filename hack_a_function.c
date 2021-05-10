@@ -20,7 +20,7 @@ void * func_1_adr_to_base (void * adr) {
 	return base;
 }
 
-void reserv (void * adr_1) {
+int reserv (void * adr_1) {
 	 size_t PageSize;
 
 
@@ -28,14 +28,15 @@ void reserv (void * adr_1) {
 
 	 if (PageSize == -1) {
 	 	printf("Error in pagesize\n");
-	 return;
+	 return -1;
 	 }
 
 	 if (mprotect(adr_1, PageSize, PROT_READ | PROT_WRITE | PROT_EXEC) == -1) {
 	 	printf("Error in mprotect\n");
+	 	return -2;
 	 }
 
-	 return;
+	 return 0;
 }
 
 long changed_code () {
@@ -58,7 +59,10 @@ int main () {
 
 	AIM_OF_HACK = (long *)&honest_func_1;
 	
-	reserv (func_1_adr_to_base(&honest_func_1));
+	if (reserv (func_1_adr_to_base(&honest_func_1)) != 0) {
+		printf("Error in reserv\n");
+		return 0;
+	}
 
 	printf("From this moment on, the program is hacked \n");
 
