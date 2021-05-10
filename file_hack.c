@@ -24,7 +24,7 @@ int STRING_MATCH_COUNTER = 0;
 char ch;
 ch = fgetc(fd);
 
-while ((STRING_MATCH_COUNTER < 10)) {
+while ((STRING_MATCH_COUNTER < 10) && (feof (fd) == 0)) {
 	if (ch == str_hello[STRING_MATCH_COUNTER]) {
 		STRING_MATCH_COUNTER ++;
 		
@@ -46,22 +46,6 @@ if (fseek(fd, -11, SEEK_CUR) != 0 ) {
 	printf("Error in fseek");
 	return 0;
 }
-
-/*
-ch = fgetc(fd);
-printf("%c\n", ch);
-
-ch = fgetc(fd);
-printf("%c\n", ch);
-
-ch = fgetc(fd);
-printf("%c\n", ch);
-
-ch = fgetc(fd);
-printf("%c\n", ch);
-
-fputs(str_sapere, fd);
-*/
 
 
 int i = 0;
