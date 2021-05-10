@@ -52,7 +52,7 @@ asm_read_decimal:
 		add byte[rax + rdx], 32
 		jmp LL
 		NS:
-		mov byte[rax + rdx], 63
+		mov byte[rax + rdx], bl
 		
 		LL:
 
@@ -62,7 +62,7 @@ asm_read_decimal:
 		
 
 asm_read:						
-	mov rax, 0x2000003					
+	mov rax, 0					
 	mov rdi, 0					
 							
 	mov rsi, var_read				
@@ -71,7 +71,7 @@ asm_read:
 	ret						
 
 asm_write:						
-	mov rax, 0x2000004					
+	mov rax, 1					
 	mov rdi, 1					
 	mov rsi, var_write			
 	mov rdx, N					
@@ -79,7 +79,7 @@ asm_write:
 	ret
 
 asm_exit:						
-	mov rax, 0x2000001					
+	mov rax, 60					
 	xor rdi, rdi					
 	syscall
 	ret
